@@ -22,7 +22,13 @@ const navbar = () => {
         </Link>
         <div className="flex flex-col ">
           <DocumentInput />
-          {/* MENU BAR */}
+          <div className="flex">
+            <Menubar className="border-none bg-transparent shadow-none h-auto p-0">
+              <MenubarMenu>
+                <MenubarTrigger>File</MenubarTrigger>
+              </MenubarMenu>
+            </Menubar>
+          </div>
         </div>
       </div>
     </nav>
