@@ -89,7 +89,7 @@ export const Editor = () => {
       }),
       TaskList,
     ],
-    content: `<h1>Hello ness</h1>`,
+    content: ``,
   });
   return (
     <div className="size-full overflow-x-auto bg-[#f9fbfd] px-4 print:p-0 print:bg-white print:overflow-visible">

@@ -63,10 +63,11 @@ export const Ruler = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      className="h-6 border-b border-gray-300 flex items-end relative select-none print:hidden"
+      className="w-[816px] mx-auto h-6 border-b border-gray-300 flex items-end relative select-none print:hidden"
     >
       <div
-        className={`max-w-[${PAGE_WIDTH}px] mx-auto w-full h-full relative `}
+        className="w-full h-full relative "
+        style={{ maxWidth: `${PAGE_WIDTH}px` }}
         id="ruler-container"
       >
         <Marker
