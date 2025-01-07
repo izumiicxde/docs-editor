@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SearchInput } from "./search-input";
 import { FileTextIcon } from "lucide-react";
+import { UserButton } from "@clerk/nextjs";
 
 export const Navbar = () => {
   return (
@@ -12,7 +13,7 @@ export const Navbar = () => {
         <h3 className="text-lg font-bold">Docs</h3>
       </div>
       <SearchInput />
-      <div />
+      <UserButton />
     </nav>
   );
 };
