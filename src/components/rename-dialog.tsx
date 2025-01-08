@@ -16,6 +16,7 @@ import { useState } from "react";
 import { isDeepStrictEqual } from "util";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 interface RenameDialogProps {
   documentId: Id<"documents">;
@@ -37,7 +38,11 @@ export const RenameDialog = ({
     setIsUpdating(true);
     update({ id: documentId, title: title.trim() || "Untitled" })
       .then(() => {
+        toast.success("Document renamed");
         setOpen(false);
+      })
+      .catch((err) => {
+        toast.error(err.message || "something went wrong");
       })
       .finally(() => {
         setIsUpdating(false);

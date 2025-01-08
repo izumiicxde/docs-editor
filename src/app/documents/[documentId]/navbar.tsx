@@ -36,6 +36,7 @@ import {
 import { MenubarSub } from "@radix-ui/react-menubar";
 import { BsFilePdf } from "react-icons/bs";
 import { useEditorStore } from "@/store/use-editor-store";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 
 const navbar = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -259,6 +260,15 @@ const navbar = () => {
             </Menubar>
           </div>
         </div>
+      </div>
+      <div className="flex items-center gap-3 pl-6">
+        <OrganizationSwitcher
+          afterCreateOrganizationUrl={"/"}
+          afterLeaveOrganizationUrl="/"
+          afterSelectOrganizationUrl={"/"}
+          afterSelectPersonalUrl={"/"}
+        />
+        <UserButton />
       </div>
     </nav>
   );
