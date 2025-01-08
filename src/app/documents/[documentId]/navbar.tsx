@@ -22,6 +22,7 @@ import {
   FilePenIcon,
   FilePlus,
   FileText,
+  FileTextIcon,
   GlobeIcon,
   ItalicIcon,
   PrinterIcon,
@@ -37,6 +38,7 @@ import { MenubarSub } from "@radix-ui/react-menubar";
 import { BsFilePdf } from "react-icons/bs";
 import { useEditorStore } from "@/store/use-editor-store";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import { Avatars } from "./avatars";
 
 const navbar = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -90,9 +92,9 @@ const navbar = () => {
     <nav className="flex items-center justify-between pt-1">
       <div className="flex gap-2 items-center ">
         <Link href={"/"}>
-          <Image src={"./logo.svg"} alt="logo" width={36} height={36} />
+          <FileTextIcon className="fill-blue-500 stroke-white size-7" />
         </Link>
-        <div className="flex flex-col ">
+        <div className="flex flex-col pt-1">
           <DocumentInput />
           <div className="flex">
             <Menubar className="border-none bg-transparent shadow-none h-auto p-0 ">
@@ -262,6 +264,7 @@ const navbar = () => {
         </div>
       </div>
       <div className="flex items-center gap-3 pl-6">
+        <Avatars />
         <OrganizationSwitcher
           afterCreateOrganizationUrl={"/"}
           afterLeaveOrganizationUrl="/"
