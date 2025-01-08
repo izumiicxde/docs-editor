@@ -77,7 +77,7 @@ const LineHeightButton = () => {
             className={cn(
               "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
               editor?.getAttributes("paragraph").lineHeight === value &&
-              "bg-neutral-200/80",
+                "bg-neutral-200/80"
             )}
           >
             <span className="text-sm">{label}</span>
@@ -204,7 +204,7 @@ const ListButton = () => {
             onClick={onclick}
             className={cn(
               "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
-              isActive() && "bg-neutral-200/80",
+              isActive() && "bg-neutral-200/80"
             )}
           >
             <Icon className="size-4 " />
@@ -247,13 +247,13 @@ const AlignButton = () => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-1 flex gap-y-1 ">
-        {alignment.map(({ label, value, icon: Icon }) => (
+        {alignment.map(({ value, icon: Icon }) => (
           <button
             key={value}
             onClick={() => editor?.chain().focus().setTextAlign(value).run()}
             className={cn(
               "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
-              editor?.isActive({ textAlign: value }) && "bg-neutral-200/80",
+              editor?.isActive({ textAlign: value }) && "bg-neutral-200/80"
             )}
           >
             <Icon className="size-4 " />
@@ -450,7 +450,7 @@ const HeadingLevelButton = () => {
               "flex items-center gap-x-2 py-1 px-3 rounded-sm hvoer:bg-neutral-200/80",
               ((value === 0 && !editor?.isActive("heading")) ||
                 editor?.isActive("heading", { level: value })) &&
-              "bg-neutral-200/80",
+                "bg-neutral-200/80"
             )}
             key={value}
             style={{ fontSize }}
@@ -505,7 +505,7 @@ const FontFamilyButton = () => {
             className={cn(
               "flex items-center gap-x-2 py-1 rounded-sm hvoer:bg-neutral-200/80",
               editor?.getAttributes("textStyles").fontFamily === value &&
-              "bg-neutral-200/80",
+                "bg-neutral-200/80"
             )}
             style={{ fontFamily: value }}
           >
@@ -533,7 +533,7 @@ export const ToolbarButton = ({
       onClick={onClick}
       className={cn(
         "text-sm h-7 min-w-7 flex items-center justify-center rounded-sm hover:bg-neutral-200/80",
-        isActive && "bg-neutral-200",
+        isActive && "bg-neutral-200"
       )}
     >
       <Icon className="size-4" />
@@ -574,7 +574,7 @@ const Toolbar = () => {
           const current = editor?.view.dom.getAttribute("spellcheck");
           editor?.view.dom.setAttribute(
             "spellcheck",
-            current === "true" ? "false" : "true",
+            current === "true" ? "false" : "true"
           );
         },
       },
@@ -603,8 +603,8 @@ const Toolbar = () => {
       {
         label: "Comment",
         icon: MessageSquarePlusIcon,
-        onClick: () => console.log("TODO: COMMENT"),
-        isActive: false, // TODO: check if comment is active
+        onClick: () => editor?.chain().focus().addPendingComment().run(),
+        isActive: editor?.isActive("liveblocksCommentMark"),
       },
       {
         label: "List Todo",
