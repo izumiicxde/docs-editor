@@ -1,7 +1,7 @@
 export default {
   providers: [
     {
-      domain: process.env.CLERK_ISSUER_URL,
+      domain: "https://vocal-mole-43.clerk.accounts.dev",
       applicationID: "convex",
     },
   ],
