@@ -1,10 +1,7 @@
 import { Editor } from "./editor";
 import Toolbar from "./Toolbar";
 import Navbar from "./navbar";
-
-//interface DocumentIdProps {
-//  params: Promise<{ documentId: string }>;
-//}
+import { Room } from "./Room";
 
 export default function page() {
   return (
@@ -14,7 +11,9 @@ export default function page() {
         <Toolbar />
       </div>
       <div className="pt-[114px] print:pt-0 w-full">
-        <Editor />
+        <Room>
+          <Editor />
+        </Room>
       </div>
     </div>
   );
