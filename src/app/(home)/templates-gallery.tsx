@@ -62,7 +62,7 @@ export const TemplatesGallery = () => {
                     }}
                     className="size-full hover:border-blue-50 rounded-sm border hover:bg-blue-50 transition flex flex-col items-center justify-center gap-y-4 bg-white"
                   />
-                  <p className="text-sm truncate font-medium">
+                  <p className="text-sm truncate font-medium select-none">
                     {template.label}
                   </p>
                 </div>
