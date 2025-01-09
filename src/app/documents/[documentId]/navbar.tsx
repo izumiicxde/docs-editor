@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { DocumentInput } from "./document-input";
@@ -39,6 +38,7 @@ import { BsFilePdf } from "react-icons/bs";
 import { useEditorStore } from "@/store/use-editor-store";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { Avatars } from "./avatars";
+import { Inbox } from "./inbox";
 
 const navbar = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -265,6 +265,7 @@ const navbar = () => {
       </div>
       <div className="flex items-center gap-3 pl-6">
         <Avatars />
+        <Inbox />
         <OrganizationSwitcher
           afterCreateOrganizationUrl={"/"}
           afterLeaveOrganizationUrl="/"

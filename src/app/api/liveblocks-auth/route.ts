@@ -19,7 +19,18 @@ export async function POST(req: Request) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const { room } = await req.json();
+  let room: string;
+  try {
+    const data = await req.json();
+    room = data.room;
+  } catch (error) {
+    return new Response("Invalid JSON", { status: 400 });
+  }
+
+  if (!room) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   const document = await convex.query(api.documents.getById, { id: room });
   if (!document) {
     return new Response("Unauthorized", { status: 401 });
@@ -33,10 +44,13 @@ export async function POST(req: Request) {
   if (!isOwner && !isOrganizationMember) {
     return new Response("Unauthorized", { status: 401 });
   }
+
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {
       name:
-        user.fullName ?? user.primaryEmailAddress?.emailAddress.split("@")[0],
+        user.fullName ??
+        user.primaryEmailAddress?.emailAddress.split("@")[0] ??
+        "Anonymous",
       avatar: user.imageUrl,
     },
   });
