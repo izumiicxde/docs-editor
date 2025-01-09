@@ -39,8 +39,12 @@ import { useEditorStore } from "@/store/use-editor-store";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { Avatars } from "./avatars";
 import { Inbox } from "./inbox";
+import { Doc } from "../../../../convex/_generated/dataModel";
 
-const navbar = () => {
+interface NavbarProps {
+  data: Doc<"documents">;
+}
+const navbar = ({ data }: NavbarProps) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { editor } = useEditorStore();
   const insertTable = ({ rows, cols }: { rows: number; cols: number }) => {
@@ -65,7 +69,7 @@ const navbar = () => {
     const blob = new Blob([JSON.stringify(content)], {
       type: "application/json",
     });
-    onDownload(blob, `document.json`); // TODO: use document name
+    onDownload(blob, `${data.title}.json`);
   };
 
   const onSaveHTML = () => {
@@ -75,7 +79,7 @@ const navbar = () => {
     const blob = new Blob([content], {
       type: "text/html",
     });
-    onDownload(blob, `document.html`); // TODO: use document name
+    onDownload(blob, `${data.title}.html`);
   };
 
   const onSaveTEXT = () => {
@@ -85,7 +89,7 @@ const navbar = () => {
     const blob = new Blob([content], {
       type: "text/plain",
     });
-    onDownload(blob, `document.txt`); // TODO: use document name
+    onDownload(blob, `${data.title}.txt`);
   };
 
   return (
@@ -95,7 +99,7 @@ const navbar = () => {
           <FileTextIcon className="fill-blue-500 stroke-white size-7" />
         </Link>
         <div className="flex flex-col pt-1">
-          <DocumentInput />
+          <DocumentInput title={data.title} id={data._id} />
           <div className="flex">
             <Menubar className="border-none bg-transparent shadow-none h-auto p-0 ">
               <MenubarMenu>
