@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Loader, LoaderIcon } from "lucide-react";
+import { LoaderIcon } from "lucide-react";
 import { DocumentRow } from "./document-row";
 import { Button } from "@/components/ui/button";
 

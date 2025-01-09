@@ -3,6 +3,7 @@ import { ConvexHttpClient } from "convex/browser";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
+import { generateColorForName } from "@/lib/utils";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 const liveblocks = new Liveblocks({
@@ -24,7 +25,7 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
     room = data.room;
-  } catch (error) {
+  } catch {
     return new Response("Invalid JSON", { status: 400 });
   }
 
@@ -46,16 +47,6 @@ export async function POST(req: Request) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const name =
-    user.fullName ??
-    user.primaryEmailAddress?.emailAddress.split("@")[0] ??
-    "Anonymous";
-  const nameToNumber = name
-    .split("")
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const hue = Math.abs(nameToNumber) % 320;
-  const color = `hsl(${hue},80%,60%)`;
-
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {
       name:
@@ -63,7 +54,11 @@ export async function POST(req: Request) {
         user.primaryEmailAddress?.emailAddress.split("@")[0] ??
         "Anonymous",
       avatar: user.imageUrl,
-      color,
+      color: generateColorForName(
+        user.fullName ??
+          user.primaryEmailAddress?.emailAddress.split("@")[0] ??
+          "Anonymous"
+      ),
     },
   });
   session.allow(room, session.FULL_ACCESS);

@@ -50,7 +50,7 @@ import { RenameDialog } from "@/components/rename-dialog";
 interface NavbarProps {
   data: Doc<"documents">;
 }
-const navbar = ({ data }: NavbarProps) => {
+const Navbar = ({ data }: NavbarProps) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { editor } = useEditorStore();
   const router = useRouter();
@@ -314,4 +314,4 @@ const navbar = ({ data }: NavbarProps) => {
   );
 };
 
-export default navbar;
+export default Navbar;
