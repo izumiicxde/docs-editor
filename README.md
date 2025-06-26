@@ -42,7 +42,8 @@ A full-featured Google Docs-style collaborative document editing web application
 
 ### 1. Clone the repository
 
-`git clone https://github.com/izumiicxde/nextjs-docs-0x.git`
+`git clone https://github.com/izumiicxde/docs-editor.git docs-editor`
+`cd docs-editor`
 
 ### 2. Install dependencies
 
