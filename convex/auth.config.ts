@@ -1,8 +1,9 @@
-export default {
+const config = {
   providers: [
     {
-      domain: "https://vocal-mole-43.clerk.accounts.dev",
+      domain: "https://allowed-emu-55.clerk.accounts.dev",
       applicationID: "convex",
     },
   ],
 };
+export default config;

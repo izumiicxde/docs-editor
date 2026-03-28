@@ -14,11 +14,14 @@ export async function POST(req: Request) {
   const { sessionClaims } = await auth();
 
   if (!sessionClaims) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized | invalid session claims", {
+      status: 401,
+    });
   }
+
   const user = await currentUser();
   if (!user) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized | User not found", { status: 401 });
   }
 
   let room: Id<"documents">;
@@ -30,21 +33,22 @@ export async function POST(req: Request) {
   }
 
   if (!room) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized | Room not provided", { status: 401 });
   }
 
   const document = await convex.query(api.documents.getById, { id: room });
   if (!document) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized | Document not found", { status: 401 });
   }
 
   const isOwner = document.ownerId === user.id;
   const isOrganizationMember =
-    document.organizationId &&
-    document.organizationId === sessionClaims?.org_id;
+    document.organizationId && document.organizationId === sessionClaims?.o?.id;
 
   if (!isOwner && !isOrganizationMember) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized | is Not the owner or a member", {
+      status: 401,
+    });
   }
 
   const session = liveblocks.prepareSession(user.id, {
@@ -57,7 +61,7 @@ export async function POST(req: Request) {
       color: generateColorForName(
         user.fullName ??
           user.primaryEmailAddress?.emailAddress.split("@")[0] ??
-          "Anonymous"
+          "Anonymous",
       ),
     },
   });

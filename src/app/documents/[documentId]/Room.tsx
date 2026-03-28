@@ -29,7 +29,7 @@ export function Room({ children }: { children: ReactNode }) {
         toast.error("Failed to fetch users");
       }
     },
-    []
+    [],
   );
 
   useEffect(() => {
@@ -50,14 +50,14 @@ export function Room({ children }: { children: ReactNode }) {
       }}
       resolveUsers={({ userIds }) => {
         return userIds.map(
-          (userId) => users.find((user) => user.id === userId) ?? undefined
+          (userId) => users.find((user) => user.id === userId) ?? undefined,
         );
       }}
       resolveMentionSuggestions={({ text }) => {
         let filteredUsers = users;
         if (text) {
           filteredUsers = users.filter((user) =>
-            user.name.toLowerCase().includes(text.toLowerCase())
+            user.name.toLowerCase().includes(text.toLowerCase()),
           );
         }
         return filteredUsers.map((user) => user.id);
